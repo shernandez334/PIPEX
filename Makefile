@@ -13,8 +13,6 @@ SRCS = main.c \
 	   pipe_init.c \
 
 LIBFT = libft/libft.a
-
-PRINTF = printf/libftprintf.a
  
 OBJS = $(SRCS:.c=.o)
 
@@ -29,17 +27,15 @@ prints:
 %.o: %.c $(HEAD) Makefile 
 	$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS) libs prints 
-	$(CC) $(FLAGS) $(OBJS)  -o $(NAME) -Llibft -lft -Lprintf -lftprintf
+$(NAME) : $(OBJS) libs 
+	$(CC) $(FLAGS) $(OBJS)  -o $(NAME) -Llibft -lft
 
 clean :
 	make clean -C libft
-	make clean -C printf
 	$(RM) $(OBJS)
 
 fclean :    clean
 	make fclean -C libft
-	make fclean -C printf
 	$(RM) $(NAME)
 
 re : fclean all

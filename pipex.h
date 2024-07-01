@@ -6,7 +6,7 @@
 /*   By: sahernan <sahernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:13:55 by sahernan          #+#    #+#             */
-/*   Updated: 2024/06/15 18:18:11 by sahernan         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:47:46 by sahernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "libft/libft.h"
-#include "printf/ft_printf.h"
 #include <fcntl.h>
 
 typedef struct {
@@ -35,7 +34,7 @@ typedef struct {
 	int 	infile_fd;
 	int 	outfile_fd;
 	int		pipe_count;
-	int		execve_num;
+	int		old_pipefd[2];
 	int		pipe_fd[2];
 	char	*env_path;
 	char	**cmnd;
@@ -48,7 +47,9 @@ void	pipe_init(t_pipx *pipx, char **args, char **env);
 void	check_files(t_pipx *pipx, char **args);
 char	*env_path(char **env, char *args);
 void	exec_pipes(t_pipx *pipx, char **env, char **args);
-void    here_doc(t_pipx *pipx, char *args);
-void    close_pipes(t_pipx *pipx);
+void    here_doc(t_pipx *pipx, char *limiter);
+void    dup_pipes(t_pipx *pipx);
+int		pipe_creator(t_pipx *pipx);
+void    close_pipes(t_pipx *pipx, int close_id);
 
 #endif
